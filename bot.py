@@ -35,28 +35,3 @@ def main() -> None:
 
 if __name__ == '__main__':
     main()
-
-# --- FUNÇÃO PRINCIPAL ---
-def main() -> None:
-    """Inicia o bot."""
-    global sheets_service, user_state_manager
-    
-    # Inicializa os serviços
-    sheets_service = SheetsService()
-    user_state_manager = UserStateManager()
-    
-    # Configura a aplicação
-    application = Application.builder().token(TELEGRAM_TOKEN).build()
-
-    # Registra os handlers
-    application.add_handler(CommandHandler("start", start_command))
-    application.add_handler(CommandHandler("menu", start_command))
-    application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, message_handler_wrapper))
-    
-    # Inicia o bot
-    logger.info("Bot iniciado! Pressione Ctrl+C para parar.")
-    application.run_polling()
-
-# --- PONTO DE ENTRADA DO SCRIPT ---
-if __name__ == '__main__':
-    main()
